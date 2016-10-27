@@ -1,0 +1,5 @@
+#! /bin/sh
+nasm -f bin -o myfirstos.bin myfirstos.asm
+dd if=myfirstos.bin of=floppy.img count=1 bs=512 
+dd if=col.bin of=floppy.img oflag=append conv=notrunc seek=1
+qemu-system-x86_64 -drive format=raw,file=floppy.img
